@@ -1,0 +1,5 @@
+<% if is_liked.present? %>
+	<%= link_to "liked", like_path(is_liked), method: :delete, remote: true, class:"text-light", style:"text-decoration:none;" %>
+<% else %>
+	<%= link_to "like", post_likes_path(post), method: :post, remote: true, class:"text-light", style:"text-decoration:none;"%>
+<% end %>

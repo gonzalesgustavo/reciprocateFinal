@@ -1,0 +1,91 @@
+	<% if @post.is_belongs_to? current_user %>
+		<%= link_to  post_path(@post), method: :delete, class: "deleted-post" do %>
+			<i class="far fa-trash-alt" aria-hidden="true"></i>
+		<% end %>
+	<% end %>
+	<%= link_to user_path(@post.user), class: "no-text-decoration" do %>
+		<%= image_tag avatar_url(@post.user), width: "40", height: "40" %>
+	<% end %>
+	<%= link_to user_path(@post.user), class: "no-text-decoration", title: @post.user.name do %>
+		<h4><strong><%= @post.user.name %></strong></h4>
+	<% end %>
+	
+	<h5><%= @post.title %></h5>
+	<p><%= @post.ingredients %></p>
+	<p><%= @post.directions %></p>
+	<p><%= @post.description %></p>
+	<p><%= @post.cooktime %></p>
+	<p><%= @post.preptime %></p>
+	<p><%= @post.oventemp %></p>
+	<p><%= @post.tempunits %></p>
+	<p><%= @post.measurementunits %></p>
+	<p><%= @post.genre %></p>
+	<% if @post.photos.size == 1 %>
+		<%= image_tag @post.photos.first.image.url(:standard) %>
+	<% else %>
+		<% @post.photos.each do |photo| %>
+			<%= image_tag photo.image.url(:standard) %>
+			<% end %>
+	
+<% end %>
+		<div class="chef-worthy-icon" id="chef-worthy-icon-id-<%= @post.id.to_s%>">
+			 <%= render "chefworthyicons", {is_liked: @is_liked, post: @post} %>
+		</div>
+	<div id="bookmark-icon-post-<%= @post.id.to_s%>">
+		<%= render "bookmark_icon", {is_bookmarked: @is_bookmarked,post: @post} %>
+	</div>
+	<div>
+		<p class="d-none post-ids"><%= @post.id.to_s%></p>
+		<div class="img-tag d-none"><%= @post.photos.first.image.url(:standard).to_s %></div>
+		<button class="btn btn-dark" id="skaity-<%= @post.id.to_s%>">Send to Kaity</button>
+		<div id="sampler"></div>
+	</div>
+	<div class="chef-worthy-text" id="chef-worthy-id-<%= @post.id.to_s%>">
+			<%= link_to "chefworthytext", {likes: @likes} %>
+		</div>
+	<div class="bg-dark">posted <%= time_ago_in_words(@post.created_at).upcase %> ago</div>
+
+
+	<div id="comment-form-post-<%= @post.id.to_s %>"> 
+	<%= render "comment_form", {post: @post} %>
+	</div>
+
+<div class="comment-post-<%= @post.id.to_s %>">
+	<%= render "comment_list", {post: @post} %>
+</div>
+
+<div class="holder" style="display: none;">
+	<p class="ings"><%= @post.ingredients.to_s %></p>
+	<p class="cur-title"><%= @post.title %></p>
+	<p class="descrip"><%= @post.description %></p>
+	<p class="dirs"><%= @post.directions %></p>
+</div>
+<script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+<script>
+	$("#skaity-<%= @post.id.to_s%>").on("click", function(){
+		let key = 134345698;
+		let image = $('.img-tag').html();
+		let ing = $('.ings').text();
+		let contents = {
+			key,
+			title: $('.cur-title').text().trim(),
+			ingredients: ing.trim(),
+			directions: $('.dirs').text().trim(),
+			description: $('.descrip').text().trim(),
+			cooktime: "<%= @post.cooktime %>",
+			preptime:"<%= @post.preptime %>",
+			oventemp: "<%= @post.oventemp %>",
+			tempunits: "<%= @post.tempunits %>",
+			measurementunits: "<%= @post.measurementunits %>",
+			genre: "<%= @post.genre %>",
+			image: image
+		};
+			let sendStr = JSON.stringify(contents);
+			$.post('http://192.168.1.127:3200/api/newrecipe', {data:sendStr}, (msg,err)=>{
+				console.log(msg);
+				$("#skaity-<%= @post.id.to_s%>").prop("disabled", true)
+			})
+
+	});
+
+</script> 

@@ -1,0 +1,41 @@
+body{
+	color: white;
+}
+.profile-wrapper{
+	padding: 60px 0;
+	border-bottom:  1px solid #ACFFF2;
+	.username{
+		font-size:  32pt;
+		line-height: 40px;
+		font-weight: 200;
+	}
+	.email{
+		font-size: 16pt;
+		font-weight: bold;
+	}
+}
+
+.round-image {
+	border-radius: 50%;
+}
+.row{
+	.edp{
+		color: #97FFF6;
+	}
+	.edit-icon{
+		background-image: image-url("edit-icon.png");
+		background-size: 48px 48px;
+		background-color: transparent;
+		width: 49px;
+		background-repeat: no-repeat;
+		border: none;
+		margin-left: 20px;
+	}
+}
+.common-btn{
+	height: 28px;
+	line-height: 24px;
+	padding: 0 24px;
+	border-color: #A4FFEB;
+	font-size: 14px;
+}

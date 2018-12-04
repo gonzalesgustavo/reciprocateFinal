@@ -1,0 +1,14 @@
+<% posts.each do |post| %>
+<div class="col-4">
+	<%= link_to post_path(post) do  %>
+	<div class="post-stat d-flex justify-content-center align-items-center text-light">
+		<span>
+			<i class="fa fa-heart text-danger" aria-hidden="true"></i>
+			<%= post.likes.size %>
+		</span>
+	</div>
+	<%= image_tag post.photos.first.image.url(:standard) %>
+	<h4 style="text-decoration: none; color: white;"><%= post.title %></h4>
+	<% end %>
+</div>
+<% end %>

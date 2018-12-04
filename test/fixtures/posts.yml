@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  ingredients: MyText
+  directions: MyText
+  cooktime: 1
+  preptime: 1
+  oventemp: 1
+  tempunits: MyString
+  measurementunits: MyString
+  genre: MyString
+  user: one
+
+two:
+  title: MyString
+  ingredients: MyText
+  directions: MyText
+  cooktime: 1
+  preptime: 1
+  oventemp: 1
+  tempunits: MyString
+  measurementunits: MyString
+  genre: MyString
+  user: two

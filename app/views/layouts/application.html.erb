@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ReciprocateRubyV001</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <%= render "layouts/shared/nav" if current_user %>   
+    <%= render "layouts/shared/devmsg" %>
+  <div class="container">
+      <%= yield %>
+  </div>
+      <!-- <%= render "layouts/shared/footer" %> -->
+
+  </body>
+</html>

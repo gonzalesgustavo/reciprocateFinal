@@ -1,0 +1,162 @@
+<div class="container" style="height: 400px;overflow: auto;">
+	<h5>Create new Recipe</h5>
+	<%= form_for @post, :html => {:multipart => true} do |f|%>
+	<div class="form-group row">
+		<%= f.label :title, class: "col-2 col-form-label" %>
+  <div class="col-10">
+  		<%= f.text_field :title, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group row">
+  <%= f.label :ingredients, class: "col-2 col-form-label" %>
+  <div class="col-10">
+    	<%= f.text_area :ingredients, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group row">
+  <%= f.label :directions, class: "col-2 col-form-label" %>
+  <div class="col-10">
+    <%= f.text_area :directions, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group row">
+  <%= f.label :description, class: "col-2 col-form-label" %>
+  <div class="col-10">
+    <%= f.text_area :description, class: "form-control"  %>
+  </div>
+</div>
+<div class="form-group row">
+	<%= f.label :cooktime, class: "col-2 col-form-label" %>
+  <div class="col-10">
+    <%= f.text_field :cooktime, class: "number-field form-control" %>
+  </div>
+</div>
+<div class="form-group row">
+ <%= f.label :preptime, class: "col-2 col-form-label" %>
+  <div class="col-10">
+    <%= f.text_field :preptime, class: "number-field form-control" %>
+  </div>
+</div>
+<div class="form-group row">
+ <%= f.label :oventemp, class: "col-2 col-form-label" %>
+  <div class="col-10">
+    	<%= f.number_field :oventemp, class: "number-field form-control" %>
+  </div>
+</div>
+<div class="form-group row">
+  <%= f.label :tempunits, class: "col-2 col-form-label" %>
+  <div class="col-10">
+    <%= f.text_field :tempunits, class: "text-field form-control" %>
+  </div>
+</div>
+<div class="form-group row">
+  <%= f.label :measurementunits, class: "col-2 col-form-label" %>
+  <div class="col-10">
+    <%= f.text_field :measurementunits, class: "text-field form-control" %>
+  </div>
+</div>
+<div class="form-group row">
+  <%= f.label :genre, class: "col-2 col-form-label" %>
+  <div class="col-10">
+    <%= f.text_field :genre, class: "text-field form-control" %>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-week-input" class="col-2 col-form-label">Images</label>
+  <div class="col-10">
+   <%= file_field_tag "images[]", type: :file, multiple: true %>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-time-input" class="col-2 col-form-label">Submit</label>
+  <div class="col-10">
+    	<%= f.submit "Submit", class: "btn btn-dark" %>
+  </div>
+</div>
+<% end %>
+</div>
+<br>
+<br>
+<hr class="bg-light">
+<br>
+<% @posted.each do |post| %>
+<div class="container mt-2 mb-2" style="border: 2px dotted #FDFFFF; border-radius: 12px;">
+	<% if post.is_belongs_to? current_user %>
+	<br>
+		<%= link_to  post_path(post), method: :delete, class: "deleted-post mr-3" do %>
+			<i class="far fa-trash-alt" aria-hidden="true"></i>
+		<% end %>
+	<% end %>
+	<%= link_to user_path(post.user), class: "no-text-decoration" do %>
+		<%= image_tag avatar_url(post.user), width: "40", height: "40" %>
+	<% end %>
+	<%= link_to user_path(post.user), class: "no-text-decoration", title: post.user.name do %>
+		<h4><strong><%= post.user.name %></strong></h4>
+	<% end %>
+	
+
+
+	<center><h5><%= post.title %></h5></center>
+	<br>
+	<center><p><%= post.description %></p></center>
+	<hr class="bg-success">
+	<center><h6>Ingredients: </h6></center>
+		<p><%= post.ingredients %></p>
+	<hr class="bg-light">
+	<center><em>Directions:</em></center>
+	<p><%= post.directions %></p>
+	<hr class="bg-light">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<center>
+				<h5>Cooktime: </h5><p><%= post.cooktime %></p>
+				<h5>Preptime:</h5><p><%= post.preptime %></p>
+				<h5>Oven Temp:</h5><p><%= post.oventemp %></p>
+				</center>
+			</div>
+			<div class="col-md-6">
+				<center>
+				<h5>Temperature Units:</h5><p><%= post.tempunits %></p>
+				<h5>Measurment Units:(US, EU)</h5><p><%= post.measurementunits %></p>
+				<h5>Genre:</h5><p><%= post.genre %></p>
+				</center>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<% if post.photos.size == 1 %>
+		<center><%= image_tag post.photos.first.image.url(:standard) %></center>
+	<% else %>
+		<% post.photos.each do |photo| %>
+			<center><%= image_tag photo.image.url(:standard) %></center>
+		<% end %>
+	<% end %>
+	<center>
+	<div class="btn-group btn-group-toggle mt-3 mb-2" data-toggle="buttons">
+
+
+
+</div>
+<br>
+<br>
+  			<label class="btn btn-success">
+    	<div class="chef-worthy-icon" style="text-decoration: none; color: white;" id="chef-worthy-icon-id-<%= post.id.to_s%>">
+			 <%= render "chefworthyicons", {is_liked: post.is_liked(current_user), post: post} %>
+		</div>
+  </label>
+  <label class="btn btn-secondary">
+    	<div class="chef-worthy-text delted-post" id="chef-worthy-id-<%= post.id.to_s%>">
+			<%= link_to "Bookmark", {likes: post.likes}, class:"text-light", style:"text-decoration:none;" %>
+		</div>
+  </label>
+  <label class="btn btn-primary text-light">
+    <%= link_to  "Posts", post_path(post), class:"text-light", style:"text-decoration:none;" %>
+  </label>
+</center>
+	<!-- //passing variables to template -->
+
+	</div>
+<% end %>

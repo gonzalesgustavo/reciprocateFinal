@@ -1,0 +1,72 @@
+body, html{
+	background-color: black;
+}
+.landing-left{
+	.dummy-phone{
+		background: image-url("borderback.png");
+		background-repeat: no-repeat;
+		background-position: right 0;
+		background-size: 560px 620px;
+		position: relative;
+		height: 618px;
+		margin-left: -35px;
+		margin-right: -15px;
+	}
+
+	.screen-shot{
+		position: absolute;
+		top: 110px;
+		right: 70px;
+		.item{
+			position: absolute;
+		}
+	}
+}
+
+//sign in form
+
+.box{
+	background-color: black;
+	border: 2px solid #AAF9F2;
+	border-radius: 1px;
+	padding: 20px;
+	margin: 0 0 10px;
+	color: white;
+}
+.logo-image{
+	background: image-url("title-white.png");
+	background-repeat: no-repeat;
+}
+.brand-name-img{
+	height: 74px;
+	width: auto;
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+.landing-right{
+	.form-login{
+		width: 450px;
+		margin-left: 30px;
+		form{
+			padding: 0 40px;
+			.btn-dark{
+				width: 100%;
+				line-height: 24px;
+				font-size: 14px;
+				font-weight: 600;
+			}
+			input{
+				border: 1px solid #6BFFEC;
+			}
+			.form-check-label {
+				padding: 0;
+				font-size: 15pt;
+				color: #98FAD6;
+			}
+			hr{
+				background-color: #89FFD4;
+			}
+		}
+	}
+}

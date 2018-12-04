@@ -1,0 +1,5 @@
+$('#chef-worthy-icon-id-<%= @post.id.to_s %>').
+	html('<%= link_to "liked", like_path(@like), method: :delete, remote: true %>');
+$('#chef-worthy-id-<%= @post.id.to_s %>').
+	html('<%= j render "posts/chefworthytext", {likes: @post.likes} %>');
+console.log("created links");

@@ -1,0 +1,7 @@
+<% post.comments.each do |comment| %>
+	<% if comment.user == current_user %>
+		<%=  link_to "delete comment", comment_path(comment), method: :delete, remote: true %>
+	<% end %>
+	<span><strong><%= comment.user.name %></strong></span>
+	<span><%= comment.content %></span>
+<% end %>

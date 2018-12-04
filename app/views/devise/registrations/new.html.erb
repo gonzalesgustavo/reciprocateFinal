@@ -1,0 +1,45 @@
+<center>
+<div class="container books">
+  <div class="row">
+    <div class="col-lg-6 landing-left">
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 landing-right text-center d-flex align-items-center">
+      <div class="form-login box">
+    <h3 class="logo-image brand-name-img"></h3>
+    <h5 class="light-color"><strong>Sign up all ye cooks!</strong></h5>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+   <%= render 'layouts/shared/devisemessg' %>
+
+    <div class="form-group">
+      <%= f.text_field :name, autofocus: true, placeholder: "Your Name", class: "form-control"  %>
+    </div>
+    <br>
+
+  <div class="form-group">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "form-control"  %>
+  </div>
+<br> 
+  <div class="form-group">
+    <%= f.password_field :password, autocomplete: "off", placeholder: "Password (6 characters minimum)", class: "form-control"  %>
+  </div>
+<br>
+  <div class="form-group">
+    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password Confirmation", class: "form-control" %>
+  </div>
+<br>
+<hr>
+<br>
+  <div class="actions">
+    <%= f.submit "Sign up", class: "btn btn-dark" %>
+  </div>
+<% end %>
+<br>
+<p>By Signing up you aggree to our <br> <strong>Terms &amp; Privacy Policy</strong></p>
+
+Already have an account?  <%= render "devise/shared/links" %>
+</div>
+</div>
+</center>
